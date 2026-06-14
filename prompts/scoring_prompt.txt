@@ -13,3 +13,6 @@ Title: {title}
 Company: {company}
 Location: {location}
 Role type: {role_type}
+
+Exclusion rules:
+- If the title contains "Product Manager" without "Technical" or "AI", score 1 automatically.
