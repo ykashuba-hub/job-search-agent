@@ -46,7 +46,7 @@ jobs:
           fi
           echo "All required fields present"
 
-     - name: Run live Claude API integration test
+      - name: Run live Claude API integration test
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
