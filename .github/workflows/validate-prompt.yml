@@ -1,0 +1,43 @@
+name: Validate Scoring Prompt
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-prompt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check prompt file exists
+        run: |
+          if [ ! -f "prompts/scoring_prompt.txt" ]; then
+            echo "ERROR: scoring_prompt.txt not found"
+            exit 1
+          fi
+          echo "Prompt file found"
+
+      - name: Check prompt is not empty
+        run: |
+          if [ ! -s "prompts/scoring_prompt.txt" ]; then
+            echo "ERROR: scoring_prompt.txt is empty"
+            exit 1
+          fi
+          echo "Prompt file is not empty"
+
+      - name: Check prompt contains required fields
+        run: |
+          if ! grep -q "{title}" prompts/scoring_prompt.txt; then
+            echo "ERROR: prompt missing {title} placeholder"
+            exit 1
+          fi
+          if ! grep -q "{company}" prompts/scoring_prompt.txt; then
+            echo "ERROR: prompt missing {company} placeholder"
+            exit 1
+          fi
+          if !
